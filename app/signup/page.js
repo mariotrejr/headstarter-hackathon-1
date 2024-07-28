@@ -1,7 +1,7 @@
-// app/signup/page.js
 "use client";
 
 import { useState } from "react";
+import { useRouter } from "next/navigation";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../../firebase";
 
@@ -9,14 +9,29 @@ export default function Signup() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState(null);
+  const router = useRouter();
 
   const handleSignup = async (e) => {
     e.preventDefault();
+    setError(null);
+
     try {
       await createUserWithEmailAndPassword(auth, email, password);
-      // Redirect to home page or dashboard after signup
+      router.push("/"); // Redirect to landing page after signup
     } catch (err) {
-      setError(err.message);
+      switch (err.code) {
+        case 'auth/email-already-in-use':
+          setError("Oops! This email is already in use. Try logging in or use another email.");
+          break;
+        case 'auth/invalid-email':
+          setError("Please enter a valid email address.");
+          break;
+        case 'auth/weak-password':
+          setError("Your password is too weak. Make sure it's at least 6 characters long.");
+          break;
+        default:
+          setError("Something went wrong. Please try again!");
+      }
     }
   };
 
@@ -24,7 +39,7 @@ export default function Signup() {
     <div className="flex items-center justify-center h-screen bg-gray-100">
       <div className="w-full max-w-md bg-white rounded-lg shadow-md p-6">
         <h2 className="text-2xl font-semibold mb-6 text-center">Sign Up</h2>
-        {error && <p className="text-red-500 text-center mb-4">{error}</p>}
+        {error && <p className="text-red-700 text-center mb-4 font-bold text-lg animate-pulse">{error}</p>}
         <form onSubmit={handleSignup}>
           <div className="mb-4">
             <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="email">
