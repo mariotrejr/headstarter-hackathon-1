@@ -10,15 +10,15 @@ export default function Home() {
         muted
         className="absolute top-0 left-0 w-full h-full object-cover z-0"
       >
-        <source src="/popcorn.mp4" type="video/mp4" />
+        <source src="kku.mp4" type="video/mp4" />
         Your browser does not support the video tag.
       </video>
       <div className="relative z-10 text-center p-10 bg-black bg-opacity-60 rounded-lg shadow-lg border-4 border-yellow-500">
         <h1 className="text-5xl font-extrabold mb-6 text-yellow-300 animate-pulse">
-          Welcome to <span className="text-yellow-500">Movie Night</span> Platform
+          Welcome to <span className="text-yellow-500">TuneLink!</span> Platform
         </h1>
         <p className="text-2xl font-bold mb-8 text-gray-300 drop-shadow-lg">
-          Experience movies like never before in our virtual cinema!
+        Stream. Vibe. Chat
         </p>
         <div className="space-x-4">
           <Link href="/login">
