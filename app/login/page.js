@@ -47,9 +47,7 @@ export default function Login() {
     <div className="flex items-center justify-center h-screen bg-gray-100">
       <div className="w-full max-w-md bg-white rounded-lg shadow-md p-6">
         <h2 className="text-2xl font-semibold mb-6 text-center">Login</h2>
-        {error && (
-          <p className="text-red-700 text-center mb-4 font-bold text-lg animate-pulse">{error}</p>
-        )}
+        {error && <p className="text-red-700 text-center mb-4 font-bold text-lg animate-pulse">{error}</p>}
         <form onSubmit={handleLogin}>
           <div className="mb-4">
             <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="email">
