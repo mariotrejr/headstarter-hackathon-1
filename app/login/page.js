@@ -4,6 +4,7 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../../firebase"; // Ensure correct import
+import Link from "next/link";
 
 export default function Login() {
   const [email, setEmail] = useState("");
@@ -44,13 +45,13 @@ export default function Login() {
   };
 
   return (
-    <div className="flex items-center justify-center h-screen bg-gray-100">
-      <div className="w-full max-w-md bg-white rounded-lg shadow-md p-6">
-        <h2 className="text-2xl font-semibold mb-6 text-center">Login</h2>
-        {error && <p className="text-red-700 text-center mb-4 font-bold text-lg animate-pulse">{error}</p>}
+    <div className="flex items-center justify-center h-screen bg-gray-900">
+      <div className="w-full max-w-md bg-gray-800 rounded-lg shadow-lg p-6">
+        <h2 className="text-3xl font-bold mb-6 text-white text-center">Login</h2>
+        {error && <p className="text-red-400 text-center mb-4 font-bold text-lg animate-pulse">{error}</p>}
         <form onSubmit={handleLogin}>
           <div className="mb-4">
-            <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="email">
+            <label className="block text-gray-300 text-sm font-medium mb-2" htmlFor="email">
               Email
             </label>
             <input
@@ -58,12 +59,12 @@ export default function Login() {
               type="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+              className="bg-gray-700 shadow appearance-none border border-gray-600 rounded w-full py-2 px-3 text-gray-300 leading-tight focus:outline-none focus:shadow-outline"
               required
             />
           </div>
           <div className="mb-6">
-            <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="password">
+            <label className="block text-gray-300 text-sm font-medium mb-2" htmlFor="password">
               Password
             </label>
             <input
@@ -71,26 +72,32 @@ export default function Login() {
               type="password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+              className="bg-gray-700 shadow appearance-none border border-gray-600 rounded w-full py-2 px-3 text-gray-300 leading-tight focus:outline-none focus:shadow-outline"
               required
             />
           </div>
-          <div className="flex items-center justify-between">
+          <div className="flex items-center justify-between mb-4">
             <button
               type="submit"
-              className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+              className="bg-blue-600 hover:bg-blue-800 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
               disabled={loading}
             >
               {loading ? "Logging in..." : "Login"}
             </button>
+            <Link href="/" className="text-blue-400 hover:text-blue-600 text-sm">
+              Go to Homepage
+            </Link>
           </div>
           <div className="text-center mt-4">
-            <a
-              href="/forgotpass"
-              className="text-blue-500 hover:text-blue-700"
-            >
+            <Link href="/forgotpass" className="text-blue-400 hover:text-blue-600">
               Forgot Password?
-            </a>
+            </Link>
+            <p className="text-gray-400 mt-4">
+              Don't have an account?{' '}
+              <Link href="/signup" className="text-blue-400 hover:text-blue-600">
+                Sign Up
+              </Link>
+            </p>
           </div>
         </form>
       </div>
