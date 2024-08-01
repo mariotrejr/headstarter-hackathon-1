@@ -4,7 +4,7 @@ import { BsFillChatDotsFill, BsFillXCircleFill, BsEmojiSmile } from 'react-icons
 import { ResizableBox } from 'react-resizable';
 import { collection, addDoc, query, orderBy, onSnapshot, serverTimestamp, Timestamp, where, getDocs, writeBatch } from 'firebase/firestore';
 import { getAuth, onAuthStateChanged } from 'firebase/auth';
-import { db } from '../../firebase';
+import { db } from '@/firebase';
 import 'react-resizable/css/styles.css';
 import EmojiPicker from 'emoji-picker-react';
 import VoiceRecorder from './VoiceRecorder';
@@ -254,7 +254,7 @@ import { BsFillChatDotsFill, BsFillXCircleFill, BsEmojiSmile } from 'react-icons
 import { ResizableBox } from 'react-resizable';
 import { collection, addDoc, query, orderBy, onSnapshot, serverTimestamp, Timestamp, where, getDocs, writeBatch } from 'firebase/firestore';
 import { getAuth, onAuthStateChanged } from 'firebase/auth';
-import { db } from '../../firebase';
+import { db } from '../firebase';
 import 'react-resizable/css/styles.css';
 import EmojiPicker from 'emoji-picker-react';
 import VoiceRecorder from './VoiceRecorder';
