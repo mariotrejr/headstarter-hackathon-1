@@ -1,0 +1,23 @@
+.custom-audio-player {
+    background: linear-gradient(to bottom, #009688, #3f51b5, #6a0f7d, #9a28a0, #d23e72); /* Gradient with teal, indigo, purple, and pink */
+    padding: 10px;
+    border-radius: 4px; /* Sharp corners for the player container */
+  }
+  
+  .audio-player .react-player {
+    background: linear-gradient(to bottom, #009688, #3f51b5, #6a0f7d, #9a28a0, #d23e72); /* Gradient for the player container */
+    border-radius: 4px; /* Sharp corners for the player */
+  }
+  
+  .audio-player .react-player .controls {
+    background: linear-gradient(to bottom, #009688, #3f51b5, #6a0f7d, #9a28a0, #d23e72); /* Gradient for the control panel */
+    border-radius: 4px; /* Sharp corners for the control panel */
+  }
+  
+  .audio-player .react-player .play-button,
+  .audio-player .react-player .volume,
+  .audio-player .react-player .seek-bar {
+    background: linear-gradient(to bottom, #009688, #3f51b5, #6a0f7d, #9a28a0, #d23e72); /* Gradient for buttons and seek bar */
+    border-radius: 4px; /* Sharp corners for buttons and seek bar */
+  }
+  
