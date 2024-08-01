@@ -1,4 +1,4 @@
-"use client";
+'use client';
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
@@ -21,7 +21,7 @@ export default function Login() {
     try {
       const userCredential = await signInWithEmailAndPassword(auth, email, password);
       console.log("User Info:", userCredential.user);
-      router.push("/dashboard");
+      router.push("/profile");
     } catch (err) {
       switch (err.code) {
         case 'auth/invalid-email':
@@ -45,7 +45,7 @@ export default function Login() {
   };
 
   return (
-    <div className="flex items-center justify-center h-screen bg-gray-900">
+    <div className="flex items-center justify-center h-screen bg-gradient-to-r from-purple-800 via-purple-900 to-black">
       <div className="w-full max-w-md bg-gray-800 rounded-lg shadow-lg p-6">
         <h2 className="text-3xl font-bold mb-6 text-white text-center">Login</h2>
         {error && <p className="text-red-400 text-center mb-4 font-bold text-lg animate-pulse">{error}</p>}

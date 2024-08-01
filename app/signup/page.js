@@ -1,4 +1,4 @@
-"use client";
+'use client';
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
@@ -37,7 +37,7 @@ export default function Signup() {
   };
 
   return (
-    <div className="flex items-center justify-center h-screen bg-gray-900">
+    <div className="flex items-center justify-center h-screen bg-gradient-to-r from-purple-800 via-purple-900 to-black">
       <div className="w-full max-w-md bg-gray-800 rounded-lg shadow-lg p-6">
         <h2 className="text-3xl font-bold mb-6 text-white text-center">Sign Up</h2>
         {error && <p className="text-red-400 text-center mb-4 font-bold text-lg animate-pulse">{error}</p>}

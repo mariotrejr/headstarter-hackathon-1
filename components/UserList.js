@@ -3,6 +3,7 @@ import { db, auth } from '../firebase';
 import { doc, onSnapshot, updateDoc, arrayRemove } from 'firebase/firestore';
 import { signOut } from 'firebase/auth';
 import Link from 'next/link';
+import { Flex, Box, Text, Avatar, Button, AvatarBadge } from '@chakra-ui/react';
 
 const UserList = () => {
   const [users, setUsers] = useState([]);
@@ -30,7 +31,7 @@ const UserList = () => {
         users: arrayRemove({
           uid: user.uid,
           displayName: user.displayName || user.email,
-          email: user.email,
+          avatarURL: user.photoURL || '', // Use photoURL if available
         }),
       });
 
@@ -39,25 +40,35 @@ const UserList = () => {
   };
 
   return (
-    <div className="bg-gray-800 p-6 rounded shadow-lg w-full max-w-md">
-      <h2 className="text-2xl font-bold mb-4 text-white">Users in the Room</h2>
-      <ul className="space-y-2">
+    <Box bg="gray.800" p={6} rounded="lg" shadow="lg" w="full" maxW="md">
+      <Text fontSize="2xl" fontWeight="bold" mb={4} color="white">
+        Users in the Room
+      </Text>
+      <Flex direction="column" spacing={4}>
         {users.map((user) => (
-          <li key={user.uid} className="bg-gray-700 text-white p-3 rounded">
-            {user.displayName || user.email}
-          </li>
+          <Flex key={user.uid} align="center" mb={2} p={3} bg="gray.700" rounded="md">
+            <Avatar src={user.avatarURL || '/default-avatar.png'} name={user.displayName} mr={3}>
+              {/* Green dot indicating active user */}
+              <AvatarBadge boxSize="1.25em" bg="green.500" borderColor="gray.700" borderWidth="2px" />
+            </Avatar>
+            <Text color="white">{user.displayName || user.email}</Text>
+          </Flex>
         ))}
-      </ul>
+      </Flex>
       <Link href="/login" passHref>
-        <button
+        <Button
           onClick={handleLeaveRoom}
-          className="mt-4 bg-red-500 text-white py-2 px-4 rounded hover:bg-red-600"
+          mt={4}
+          bg="red.500"
+          color="white"
+          _hover={{ bg: 'red.600' }}
         >
           Leave Room
-        </button>
+        </Button>
       </Link>
-    </div>
+    </Box>
   );
 };
 
 export default UserList;
+

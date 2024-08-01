@@ -1,12 +1,39 @@
-// app/dashboard/page.js
 "use client";
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import { useRouter } from 'next/navigation';
+import { useAuth } from '@/contexts/AuthContext';
 import UserList from '../../components/UserList';
-import Chat from '../components/Chat';
+import Chat from '../../components/Chat';
+import ScreenSharing from '../../components/ScreenRecord'; // Import the ScreenSharing component
 
 const Dashboard = () => {
-  const [roomId] = useState('mainRoom'); // Define roomId in state
+  const { user, loading, signOut } = useAuth();
+  const router = useRouter();
+  const [roomId] = useState('mainRoom');
+
+  useEffect(() => {
+    if (!loading && !user) {
+      router.push('/login'); // Redirect to login if not authenticated
+    }
+  }, [user, loading, router]);
+
+  const handleSignOut = async () => {
+    try {
+      await signOut();
+      router.push('/login'); // Redirect to login page after sign-out
+    } catch (error) {
+      console.error('Error signing out:', error);
+    }
+  };
+
+  if (loading) {
+    return <div>Loading...</div>; // Show a loading indicator while checking authentication
+  }
+
+  if (!user) {
+    return null; // Render nothing while redirecting
+  }
 
   return (
     <div
@@ -20,24 +47,13 @@ const Dashboard = () => {
     >
       {/* Sidebar for UserList */}
       <aside className="w-1/4 bg-gray-800 bg-opacity-70 p-4 text-white flex-shrink-0">
-        <h2 className="text-xl font-semibold mb-4">Users in Room</h2>
         <UserList />
       </aside>
       
-      {/* Main content area with Spotify embedding in the middle */}
+      {/* Main content area with Screen Sharing in the middle */}
       <main className="flex-grow bg-gray-900 bg-opacity-70 p-6 flex flex-col justify-start">
         <div className="bg-gray-800 rounded-lg shadow-lg p-4 w-full max-w-4xl mb-4">
-          <h3 className="text-xl font-semibold mb-4 text-white">Now Playing</h3>
-          <iframe
-            style={{ borderRadius: '12px' }}
-            src="https://open.spotify.com/embed/episode/28yVF79higtNvxJhLr4JKF?utm_source=generator"
-            width="100%"
-            height="352"
-            frameBorder="0"
-            allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
-            loading="lazy"
-            title="Spotify Player"
-          ></iframe>
+          <h3 className="text-xl font-semibold mb-4 text-white">Screen Sharing</h3>
         </div>
       </main>
 
@@ -52,6 +68,6 @@ const Dashboard = () => {
       </aside>
     </div>
   );
-}
+};
 
 export default Dashboard;
